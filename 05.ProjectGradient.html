@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-image: linear-gradient(to right, #f6bec7, #503232);
+        }
+        #box{
+            margin: auto;
+            width: 25rem;
+            margin-top: 20rem;
+            padding: 20px;
+        }
+        button{
+            width: 10rem;
+            height: 2rem;
+            border-radius: 10px;
+            padding: 4px;
+            font-size: 18px;
+            margin-right: 10px;
+            background-color: rgba(215, 208, 208, 0.1);
+        }
+        button:hover{
+            box-shadow: 2px 4px 10px 2px rgb(65, 61, 61);
+        }
+        #msg{
+            text-align: center;
+            padding: 10px;
+            margin:10px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        #generatedcode{
+            border-left: 4px solid white;
+            padding: 10px;
+            padding-left: 20px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background-color: rgb(229, 220, 220, 0.5);
+            color: rgb(3, 1, 1);
+            font-size: 1.2rem;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <button id="hexbtn1"> #f6bec7</button>
+        <button id="hexbtn2"> #503232</button>
+        <p id="msg">Generate linear-gradient color combination by click on buttons and just click on code to copy code.</p>
+        <p id="generatedcode">background-Image: linear-gradient(to right, #f6bec7, #503232);</p>
+    </div>
+
+
+    <script>
+        let hexbtn1=document.getElementById('hexbtn1');
+        let hexbtn2=document.getElementById('hexbtn2');
+        let generatedcode=document.getElementById('generatedcode');
+        let bg1= '#f6bec7';
+        let bg2= '#503232';
+
+        const hexvalues=()=>{
+            let hexcode1="1234567890abcdef";
+            let color= "#";
+            for(let i=0; i<6; i++){ 
+                color= color + hexcode1[Math.floor(Math.random()*16)];
+            };
+            return color;
+        };
+
+        const callfun1=()=>{
+             bg1= hexvalues();
+             hexbtn1.innerText=bg1;
+             document.body.style.backgroundImage=`linear-gradient(to right, ${bg1} , ${bg2})`;
+             generatedcode.innerHTML=`background-image: linear-gradient(to right, ${bg1}, ${bg2});`;
+             
+        };
+
+        const callfun2=()=>{
+             bg2=hexvalues();
+             hexbtn2.innerText=bg2;
+             console.log(bg2);
+             document.body.style.backgroundImage=`linear-gradient(to right, ${bg1} , ${bg2})`;
+             generatedcode.innerHTML=`background-image: linear-gradient(to right, ${bg1}, ${bg2});`;
+        };
+
+        hexbtn1.addEventListener("click",callfun1);
+        hexbtn2.addEventListener("click",callfun2);
+
+        generatedcode.addEventListener("click", ()=>{
+        navigator.clipboard.writeText(generatedcode.innerHTML);
+        });
+    </script>
+</body>
+</html>
